@@ -16,34 +16,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/item_tv_initial"
-                android:textSize="30sp"
-                android:padding="4dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="16dp"
-                tools:text="H"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="16dp"/>
 
             <TextView
+                android:id="@+id/item_tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/item_tv_title"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/item_tv_initial"
-                android:layout_marginStart="16dp"
-                tools:text="@{todo.title.toString()}"
-                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/item_tv_descript"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/item_tv_descript"/>
+                tools:text="@{todo.title.toString()}" />
 
             <TextView
                 android:id="@+id/item_tv_descript"
