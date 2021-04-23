@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.sampletodolist.database.Todo
 import com.example.sampletodolist.database.TodoDao
 import com.example.sampletodolist.database.TodoDatabase
+import java.lang.Exception
 
 class Repository(application: Application) {
     private val todoDatabase: TodoDatabase = TodoDatabase.getInstance(application)!!
@@ -16,10 +17,20 @@ class Repository(application: Application) {
     }
 
     fun insert(todo: Todo) {
-        todoDao.insert(todo)
+        try {
+            val thread = Thread(Runnable {
+                todoDao.insert(todo)
+            })
+            thread.start()
+        } catch (e: Exception) { }
     }
 
     fun delete(todo: Todo) {
-        todoDao.delete(todo)
+        try {
+            val thread = Thread(Runnable {
+                todoDao.delete(todo)
+            })
+            thread.start()
+        } catch (e: Exception) { }
     }
 }
