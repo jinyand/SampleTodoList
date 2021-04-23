@@ -3,6 +3,7 @@ package com.example.sampletodolist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -16,18 +17,21 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        // 뷰모델
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.viewModel = mainViewModel
         binding.lifecycleOwner = this
 
         setRecyclerView()
+
+        binding.btnAdd.setOnClickListener {
+            val intent = Intent(this, AddActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
@@ -50,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             rvMain.adapter = adapter
             rvMain.layoutManager = LinearLayoutManager(applicationContext)
-            rvMain.setHasFixedSize(true) // 아이템의 크기가 변경되지 않는다 = true
         }
 
         mainViewModel.getAll().observe(this, Observer { todos ->
