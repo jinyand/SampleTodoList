@@ -8,7 +8,7 @@ interface TodoDao {
     @Query("SELECT * FROM Todo")
     fun getAll(): LiveData<List<Todo>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(todo: Todo)
 
     @Update
